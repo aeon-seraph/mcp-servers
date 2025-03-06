@@ -1,0 +1,17 @@
+{
+  "name": "mcp-servers",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Model Context Protocol servers",
+  "license": "MIT",
+  "author": "aeon-seraph",
+  "type": "module",
+  "workspaces": [
+    "src/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "start": "npm run start --workspaces",
+    "test": "npm run test --workspaces"
+  }
+}
