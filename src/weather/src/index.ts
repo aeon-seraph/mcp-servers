@@ -4,6 +4,7 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprot
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import * as alerts from './alerts.js';
+import * as forecast from './forecast.js';
 
 
 const server = new Server({
@@ -24,6 +25,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                 description: "Get weather alerts for a state",
                 inputSchema: zodToJsonSchema(alerts.GetAlertsSchema),
             },
+            {
+                name: "get_forecast",
+                description: "Get weather forecast for a location",
+                inputSchema: zodToJsonSchema(forecast.GetForecastSchema),
+            }
         ]
     }
 })
@@ -41,9 +47,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                 const result = await alerts.getAlerts(
                     args.state
                 );
-                return {
-                    content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
-                };
+                return result;
+            }
+            case "get_forecast": {
+                const args = forecast.GetForecastSchema.parse(request.params.arguments);
+                const result = await forecast.getForecast(
+                    args.latitude,
+                    args.longitude
+                )
+                return result;
             }
 
             default:

@@ -63,15 +63,13 @@ export async function getAlerts(state: string) {
     const formattedAlerts = features.map(formatAlert);
     const alertsText = `Active alerts for ${stateCode}:\n\n${formattedAlerts.join("\n")}`;
 
-    return alertsText;
-
-    // return {
-    //     content: [
-    //         {
-    //             type: "text",
-    //             text: alertsText,
-    //         },
-    //     ],
-    // };
+    return {
+        content: [
+            {
+                type: "text",
+                text: alertsText,
+            },
+        ],
+    };
 }
 
