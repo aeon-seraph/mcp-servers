@@ -1,0 +1,32 @@
+{
+  "type": "module",
+  "bin": {
+    "puppeteer-server": "build/index.js"
+  },
+  "name": "puppeteer-server",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc && node --input-type=module -e \"import { promises as fs } from 'fs'; await fs.chmod('build/index.js', '755');\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "start": "node build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": [],
+  "author": "aeon-seraph",
+  "license": "MIT",
+  "description": "MCP server for Puppeteer library",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "puppeteer": "^22.6.0",
+    "zod": "^3.24.2",
+    "zod-to-json-schema": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/puppeteer": "^5.4.7",
+    "typescript": "^5.8.2"
+  }
+}
